@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>✨ Digital Diary — Your Personal Space</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="background-animation">
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+      </div>
+    </div>
+    <div id="app">
+      <!-- Auth area -->
+      <div id="auth" class="card glass-card">
+        <div class="auth-header">
+          <div class="diary-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h1 class="gradient-text">Digital Diary</h1>
+          <p class="auth-subtitle">
+            Your personal space for thoughts and memories
+          </p>
+        </div>
+
+        <div id="registerBox" class="auth-box">
+          <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input id="regUser" placeholder="Username" />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input id="regPass" placeholder="Password" type="password" />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-key"></i>
+            <input
+              id="regPin"
+              placeholder="4-digit PIN (optional)"
+              maxlength="4"
+            />
+          </div>
+          <button id="btnRegister" class="primary-btn">
+            <i class="fas fa-sparkles"></i>
+            Create Account
+          </button>
+          <p class="small">
+            Already have an account?
+            <a href="#" id="showLogin" class="auth-link">Login</a>
+          </p>
+        </div>
+
+        <div id="loginBox" class="auth-box hidden">
+          <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input id="loginUser" placeholder="Username" />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input id="loginPass" placeholder="Password" type="password" />
+          </div>
+          <button id="btnLogin" class="primary-btn">
+            <i class="fas fa-door-open"></i>
+            Login
+          </button>
+          <p class="small">
+            New?
+            <a href="#" id="showRegister" class="auth-link">Create account</a>
+          </p>
+        </div>
+
+        <div id="pinBox" class="auth-box hidden">
+          <h2><i class="fas fa-unlock"></i> Quick Unlock</h2>
+          <div class="input-group pin-input">
+            <i class="fas fa-fingerprint"></i>
+            <input
+              id="pinInput"
+              placeholder="Enter 4-digit PIN"
+              maxlength="4"
+            />
+          </div>
+          <button id="btnPin" class="primary-btn">
+            <i class="fas fa-unlock-alt"></i>
+            Unlock
+          </button>
+          <p class="small">
+            <a href="#" id="logoutFromPin" class="auth-link">Logout</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Main diary UI -->
+      <div id="main" class="hidden main-container">
+        <header class="app-header">
+          <div class="left">
+            <div class="header-title">
+              <i class="fas fa-feather-alt"></i>
+              <h2 class="gradient-text">Your Diary</h2>
+            </div>
+            <div class="controls">
+              <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input id="search" placeholder="Search your thoughts..." />
+              </div>
+              <button id="newNote" class="new-note-btn">
+                <i class="fas fa-plus"></i>
+                <span>New Entry</span>
+              </button>
+            </div>
+          </div>
+          <div class="right">
+            <div class="action-buttons">
+              <button id="btnExport" class="icon-btn" title="Export Data">
+                <i class="fas fa-download"></i>
+              </button>
+              <input
+                id="importFile"
+                type="file"
+                accept=".json"
+                style="display: none"
+              />
+              <button id="btnImport" class="icon-btn" title="Import Data">
+                <i class="fas fa-upload"></i>
+              </button>
+              <button
+                id="btnToggleDark"
+                class="icon-btn"
+                title="Toggle Dark Mode"
+              >
+                <i class="fas fa-moon"></i>
+              </button>
+              <button id="btnLock" class="icon-btn" title="Lock Diary">
+                <i class="fas fa-lock"></i>
+              </button>
+              <button id="btnLogout" class="icon-btn logout-btn" title="Logout">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="workspace">
+          <aside class="sidebar glass-card">
+            <div class="sidebar-header">
+              <i class="fas fa-journal-whills"></i>
+              <h3>Your Entries</h3>
+            </div>
+            <div id="notesList" class="notes-container"></div>
+          </aside>
+
+          <section class="editor glass-card">
+            <div class="editor-header">
+              <div class="input-group title-input">
+                <i class="fas fa-heading"></i>
+                <input
+                  id="noteTitle"
+                  placeholder="Give your entry a title..."
+                />
+              </div>
+            </div>
+            <div class="editor-body">
+              <textarea
+                id="noteBody"
+                placeholder="Pour your thoughts here...
+
+✨ What's on your mind today?
+💭 Share your experiences, dreams, and reflections
+📝 This is your safe space to express yourself"
+              ></textarea>
+            </div>
+            <div class="editor-footer">
+              <div class="meta-info">
+                <i class="fas fa-clock"></i>
+                <div id="meta"></div>
+              </div>
+              <div class="editor-actions">
+                <button id="btnSave" class="save-btn">
+                  <i class="fas fa-save"></i>
+                  Save Entry
+                </button>
+                <button id="btnDelete" class="delete-btn">
+                  <i class="fas fa-trash-alt"></i>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <!-- small footer -->
+      <footer id="foot" class="app-footer">
+        <div class="footer-content">
+          <i class="fas fa-heart"></i>
+          <span
+            >Digital Diary • Works offline • Securely saved in your
+            browser</span
+          >
+          <i class="fas fa-shield-alt"></i>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
